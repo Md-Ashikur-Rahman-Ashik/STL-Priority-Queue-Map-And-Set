@@ -11,27 +11,56 @@ int main()
         int smallAppNumber, bigAppNumber;
         cin >> smallAppNumber >> bigAppNumber;
 
-        int totalAppSize = 15;
-        int requiredScreen = 1;
-
-        int bigToSmall = bigAppNumber * 4;
-        int currentAppSize = smallAppNumber + bigToSmall;
-
-        if (currentAppSize > totalAppSize)
+        if (smallAppNumber == 0 && bigAppNumber == 0)
         {
-            while (true)
-            {
-                currentAppSize = currentAppSize - 15;
-                requiredScreen++;
-                if (currentAppSize <= 15)
-                {
-                    break;
-                    ;
-                }
-            }
+            cout << 0 << endl;
+            continue;
         }
 
-        cout << requiredScreen << endl;
+        int totalAppSize = 15;
+        int requiredScreen = 0;
+
+        int bigToSmall = bigAppNumber * 4;
+        if (bigToSmall >= 8)
+        {
+            while (bigToSmall >= 4)
+            {
+                requiredScreen++;
+                bigToSmall = bigToSmall - 8;
+            }
+
+            int vacantSpace = (requiredScreen * 15) - (bigAppNumber * 4) - smallAppNumber;
+
+            if (vacantSpace >= 0)
+            {
+                cout << requiredScreen << endl;
+                continue;
+            }
+            else
+            {
+                cout << requiredScreen + 1 << endl;
+                continue;
+            }
+        }
+        else
+        {
+            int currentAppSize = smallAppNumber + bigToSmall;
+            requiredScreen = 1;
+            if (currentAppSize > totalAppSize)
+            {
+                while (currentAppSize >= 15)
+                {
+                    requiredScreen++;
+                    currentAppSize = currentAppSize - 15;
+                }
+
+                cout << requiredScreen << endl;
+            }
+            else
+            {
+                cout << requiredScreen << endl;
+            }
+        }
     }
 
     return 0;
